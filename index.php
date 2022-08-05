@@ -1,4 +1,5 @@
 <?php
+    session_start();
     // $name = "justin";
     // // echo 'Hello World ' . $name ;
     // // echo "Hello $name";
@@ -172,8 +173,10 @@
        $result = array_filter($users, "check_login");
 
        if(count($result) == 0) {
+        $_SESSION["isLoggedIn"] = false;
         echo "login failed";
        } else {
+        $_SESSION["isLoggedIn"] = true;
         echo "login successful";
        }
 
