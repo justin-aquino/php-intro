@@ -8,7 +8,7 @@
   </head>
   <body>
     <h1>Login</h1>
-    <form action="index.php" method="post">
+    <form action="controllers/auth.php" method="post">
       <!-- send the form to index.php
         only post and get method just like EJS
     -->

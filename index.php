@@ -145,51 +145,5 @@
             $_SESSION["age"] = 26;
         */
 
-        $users = [
-            ["username" => "user1", "password" => "password1"],
-            ["username" => "user2", "password" => "password2"],
-            ["username" => "user3", "password" => "password3"],
-        ];
-
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-        echo "username: $username <br> password: $password";
-
-        //check if user credentials exists in users array
-
-        
-        
-        // $found = false;
-        
-        //VARIABLES OUTSIDE FUNCTIONS IS NOT ACCESSIBLE INSIDE FUNCTIONS. USE KEYWORD GLOBAL
-
-        $log = ["username" => $username, "password" => $password];
-
-        function check_login($user) {
-            global $log;
-            return $user == $log;
-        }
-
-       $result = array_filter($users, "check_login");
-
-       if(count($result) == 0) {
-        $_SESSION["isLoggedIn"] = false;
-        echo "login failed";
-       } else {
-        $_SESSION["isLoggedIn"] = true;
-        echo "login successful";
-       }
-
-        // foreach($users as $user){
-        //     if ($user == $log){
-        //         $found = true;
-        //         echo " <br> login successful";
-        //         break;
-        //     }
-        // }
-        // if (!$found) {
-        //     echo "<br> login failed";
-        // }
-
     //LEFT OFF AT 1:28:23 DAY2 PHP
 ?>

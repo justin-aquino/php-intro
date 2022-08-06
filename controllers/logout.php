@@ -3,7 +3,7 @@
 
     if(isset($_POST["logout"])){
         $_SESSION["isLoggedIn"] = false;
-        echo "logout successful.";
+        header("location: ../login.php");
     } else {
         echo "error 404";
     }
