@@ -12,14 +12,17 @@
     // $sql = "SELECT * FROM users";
     $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
     $result = mysqli_query($conn, $sql); //1st arg is the connection, 2nd arg is the sql command. 
-    //Will return mysqli_result object.
+    //Will return mysqli_result object. 
 
     echo $password;
     print_r($result);
 
     if(mysqli_num_rows($result) == 1) { //pass in query result to get the num_rows
         //credentials exists, so log user in.
+        $user = mysqli_fetch_assoc($result);
         $_SESSION["isLoggedIn"] = true;
+        $_SESSION["username"] = $user["username"];
+        $_SESSION["role"] = $user["role"];
         header("location: ../gallery.php");
     } else {
         $_SESSION["isLoggedIn"] = false;

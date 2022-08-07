@@ -44,7 +44,7 @@
 
     <nav>
         <img src="https://placekitten.com/200/500" alt="">
-        <span>Hello User!</span>
+        <span>Hello <?= $_SESSION["username"]  ?></span>
     </nav>
     <h1>Gallery</h1>
     <a href="add-item.php">
@@ -79,16 +79,28 @@
                 <p><?php echo $category_name ?></p> <!-- you need to JOIN tables to populate
                     check sql query command to avoid overriding the name for the item, and the name for the category.
             -->
-                <p>
-                    <a href="update_item.php?id=<?= $item_id ?>">
-                        <button>Edit</button>
-                    </a>
-                    <button class="delete-btn">Delete</button>
-                </p>
-            </div>
+                <?php if($_SESSION['role'] == 'admin') :?>
+                    <p>
+                        <a href="update_item.php?id=<?= $item_id ?>">
+                            <button>Edit</button>
+                        </a>
+                        <form action="controllers/delete-item.php?id=<?= $item_id ?>" method="post">
+                            <label hidden for="delete">delete:</label>
+                            <input type="submit" value="Delete" name="delete">
+                        </form>
+                    </p>
+                <?php else :?>
+                    <p>
+                        <form action="controllers/delete-item.php?id=<?= $item_id ?>" method="post">
+                            <label hidden for="add-to-cart">add to cart:</label>
+                            <input type="submit" value="add to cart" name="add-to-cart">
+                        </form>
+                    </p>
+                <?php endif ?>
+                </div>
         <?php
             } //this is the closing for the foreach and replace { with :
-            //you can also  use endforeach; to end the foreach instead of a closing curly.
+                //you can also  use endforeach; to end the foreach instead of a closing curly.
         ?>
     </section>
 
