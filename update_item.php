@@ -10,6 +10,10 @@
     //access the data right away.
 
     // print_r($item);
+    $sql = "SELECT * FROM categories";
+    $categories = mysqli_query($conn, $sql);
+
+    $selected;
 
     //UPDATE items SET name = '$name', price = '$price', WHERE id = $id;
 ?>
@@ -23,16 +27,43 @@
     <title>Edit Form</title>
 </head>
 <body>
-    <form action="">
+    <!-- <form action="">
         <label for="name">Name: </label>
-        <input type="text" name="name" id="" value="<?= $item['name'] ?>">
+        <input type="text" name="name" id=""  ?>">
         <label for="price">Price: </label>
-        <input type="number" name="price" id="" value="<?= $item['price'] ?>">
+        <input type="number" name="price" id=""  ?>">
         <label for="category">category: </label>
-        <input type="text" name="category" id="" value="<?= $item['category_id'] ?>">
+        <input type="text" name="category" id="">
         <label for="image">image: </label>
-        <input type="text" name="image" id="" value="<?= $item['image'] ?>">
+        <input type="text" name="image" id="" >
 
+        <input type="submit" value="Submit">
+    </form> -->
+    <form action="controllers/update-item.php?item_id=<?= $item['id'] ?>" method="post">
+        <label hidden for="item_id">item_id</label>
+        <input hidden type="number" name="item_id" value="<?= $item['id'] ?>">
+        <label for="name">Name: </label>
+        <input type="text" name="name" value="<?= $item['name'] ?>"> 
+        <br>
+        <label for="price">Price: </label>
+        <input type="text" name="price" value="<?= $item['price'] ?>"> 
+        <br>
+        <label for="category_id">Category: </label>
+        <select name="category_id" value="<?= $item['category_id'] ?>">
+            <?php
+                foreach($categories as $category) :?>
+                    <option 
+                        <?= 
+                            $category['id'] == $item['category_id'] ? 'selected' : ''
+                        ?>
+                        value="<?=  $category['id'] ?>"> <?= $category["name"] ?>
+                    </option> <!-- value should be category because we're saving the id to the db. Not the name. -->
+            <?php endforeach ?>
+        </select> 
+        <br>
+        <label for="image">Image: </label>
+        <input type="text" name="image" value="<?= $item['image'] ?>"> 
+        <br>
         <input type="submit" value="Submit">
     </form>
 </body>

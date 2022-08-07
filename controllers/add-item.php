@@ -7,10 +7,16 @@
     $category_id = $_POST['category_id'];
     $image = $_POST['image'];
 
-    // echo "$name $price $category_id $image";
+    echo "$name $price $category_id $image";
 
     $sql = "INSERT INTO items (name, price, image, category_id)
-            VALUES ($name, $price, $image, $category_id)
-            "
-    msqli_query($conn, $sql)
+            VALUES ('$name', $price, '$image', $category_id)
+            ";
+    $result = mysqli_query($conn, $sql);
+
+    if(mysqli_error($conn)){
+        die(mysqli_error($conn));
+    }
+
+    header("location: ../gallery.php");
 ?>
